@@ -1,5 +1,6 @@
 ''' This code is the functions for leiden community detection algorithm and applying it to the flow data.
-We import the functions within this script to the main code of solution1 and solution2'''
+We first make a migration matrix and graph and then apply the leiden algorithm to detect the communities.
+We use the partition files results from this code to the main code of solution1 and solution2 of mapping the regions'''
 
 import igraph as ig
 import leidenalg as la
@@ -74,3 +75,15 @@ def leidenimplement(flowdir, origin, destination, weight):
                     f.write('\n'.join(text))
             except Exception as e:
                 print(f"Partition and summary files cannot be saved. Error: {e}")
+
+# apply leiden algorithm to the flow data
+folder = '/Users/maryamtorkashvand/Library/CloudStorage/OneDrive-UniversityofIowa/My_Phd/Phd_Courses/Spring_2024/Geoprogramming/project/data/'
+try:
+    flowdir = folder + 'flows'
+    origin = 'orgState'
+    destination = 'destState'
+    weight = 'flows'
+    leidenimplement(flowdir, origin, destination, weight)
+    print("Leiden algorithm applied successfully.")
+except Exception as e:
+    print(f"Leiden algorithm failed. Error: {e}")
